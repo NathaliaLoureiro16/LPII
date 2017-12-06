@@ -9,6 +9,7 @@ import br.fundatec.natflix.convert.NatflixConvert;
 import br.fundatec.natflix.dao.NatflixDao;
 import br.fundatec.natflix.dao.SerieEntity;
 import br.fundatec.natflix.web.SerieBo;
+import br.fundatec.natflix.web.SerieDTO;
 
 @Component
 public class NatflixService {
@@ -20,18 +21,29 @@ public class NatflixService {
 	}
 
 	public List<SerieBo> pegaSeries() {
-	List<SerieBo> seriesBo = NatflixConvert.convertListEntitytoBo(nDao.getSeries())
+	List<SerieBo> seriesBo = NatflixConvert.convertListEntitytoBo(nDao.getSeries());
 		return seriesBo;
 	}
 	
-	public SerieBo addSerie(SerieBo seBo) {
-		SerieEntity se = NatflixConvert.convertBotoEntity(seBo);
+	public SerieBo addSerie(SerieBo bo) {
+		SerieEntity se = NatflixConvert.convertBotoEntity(bo);
 		se = nDao.addSerie(se);
-		seBo = NatflixConvert.convertEntitytoBo(se);
-		return seBo;
+		bo = NatflixConvert.convertEntitytoBo(se);
+		return bo;
 		
 	}
-//acrecentaserie
 
-	//deletaseries
+	public void deletaSerie(Long id) {
+		nDao.deleteSerie(id);
+		
+	
+	}
+
+	public void getSerieByID(Long id) {
+		
+		
+	}
+
+
+
 }
