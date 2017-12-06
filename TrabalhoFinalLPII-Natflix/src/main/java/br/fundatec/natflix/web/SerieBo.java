@@ -1,47 +1,17 @@
-package br.fundatec.natflix.dao;
+package br.fundatec.natflix.web;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+public class SerieBo {
 
-
-@Entity
-@Table(name = "serie")
-public class SerieEntity {
-	
-	@Id
-	@Column(name="id")
-	@GeneratedValue
 	private long id;
-	
-	@Column(name="titulo")
 	private String titulo;
-	
-	@Column(name="anoLancamento")
 	private Date anoLancamento;
-	
-	@Column(name="descricao")
 	private String descricao;
-	
-	@Column(name="atores")
 	private String atores;
-	
-	@Column(name="criacao")
 	private String criacao;
-	
-	@Column(name="genero")
 	private String genero;
-	
-	@Column(name="temporada")
 	private int temporada;
-	
-	//@OneToMany
 	//private List <EpisodioEntity> episodios;
 	
 	public long getId() {
@@ -99,5 +69,4 @@ public class SerieEntity {
 		this.episodios = episodios;
 	}
 	*/
-	
 }

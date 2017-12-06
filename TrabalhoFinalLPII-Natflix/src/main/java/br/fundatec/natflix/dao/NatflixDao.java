@@ -1,5 +1,6 @@
 package br.fundatec.natflix.dao;
 
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -13,9 +14,26 @@ public class NatflixDao {
 	public NatflixDao(EntityManager em) {
 		this.em = em;
 	}
+
 	@Transactional
-	public void bla(SerieEntity se) {
-		em.merge(se);
+	public SerieEntity addSerie(SerieEntity se) {
+		return em.merge(se);
+	}
+
+	public SerieEntity getSerieByID(long id) {
+		SerieEntity serie = new SerieEntity();
+		serie = em.find(SerieEntity.class, id);
+		return serie;
+	}
+	public List<SerieEntity> getSeries(){
+		return em.createQuery("from SerieEntity").getResultList();
+	}
+	
+	@Transactional
+	public void deleteSerie(long id) {
+		SerieEntity se = new SerieEntity();
+		se.setId(id);
+		em.remove(se);
+
 	}
 }
-
