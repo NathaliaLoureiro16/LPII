@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class NatflixDao {
 	private EntityManager em;
 
@@ -31,9 +33,11 @@ public class NatflixDao {
 	
 	@Transactional
 	public void deleteSerie(long id) {
-		SerieEntity se = new SerieEntity();
-		se.setId(id);
-		em.remove(se);
+		SerieEntity se = em.find(SerieEntity.class, id);
+		if(se != null) {
+			em.remove(se);
+		}
+		
 
 	}
 }

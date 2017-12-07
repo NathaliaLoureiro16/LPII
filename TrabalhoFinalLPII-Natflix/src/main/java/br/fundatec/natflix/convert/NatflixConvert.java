@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.fundatec.natflix.dao.SerieEntity;
-import br.fundatec.natflix.web.SerieBo;
+import br.fundatec.natflix.service.SerieBo;
 import br.fundatec.natflix.web.SerieDTO;
 
 public class NatflixConvert {
@@ -72,5 +72,31 @@ public class NatflixConvert {
 		}
 		return dtos;
 	}
-	public static List<SerieBo> convertListDTOtoBo(List<SerieBo> Bo) {
+
+	public static SerieDTO convertBotoDTO(SerieBo bo) {
+		SerieDTO dto = new SerieDTO();
+		dto.setId(bo.getId());
+		dto.setTitulo(bo.getTitulo());
+		dto.setAnoLancamento(bo.getAnoLancamento());
+		dto.setDescricao(bo.getDescricao());
+		dto.setAtores(bo.getAtores());
+		dto.setCriacao(bo.getCriacao());
+		dto.setGenero(bo.getGenero());
+		dto.setTemporada(bo.getTemporada());
+		return dto;
+
+	}
+
+	public static SerieBo convertDTOtoBo(SerieDTO dto) {
+		SerieBo Bo = new SerieBo();
+		Bo.setId(dto.getId());
+		Bo.setTitulo(dto.getTitulo());
+		Bo.setAnoLancamento(dto.getAnoLancamento());
+		Bo.setDescricao(dto.getDescricao());
+		Bo.setAtores(dto.getAtores());
+		Bo.setCriacao(dto.getCriacao());
+		Bo.setGenero(dto.getGenero());
+		Bo.setTemporada(dto.getTemporada());
+		return Bo;
+	}
 }

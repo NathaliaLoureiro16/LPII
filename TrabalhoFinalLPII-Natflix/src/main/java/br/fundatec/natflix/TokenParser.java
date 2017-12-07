@@ -1,4 +1,4 @@
-package br.fundatec.app;
+package br.fundatec.natflix;
 
 import java.security.Key;
 import java.text.SimpleDateFormat;
@@ -62,6 +62,6 @@ public class TokenParser {
 	}
 	
 	public static void main(String[] args) {
-		createToken("mauricio");
+		System.out.println(createToken("admin"));
 	}
 }

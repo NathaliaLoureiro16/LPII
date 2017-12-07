@@ -1,4 +1,4 @@
-package br.fundatec.app;
+package br.fundatec.natflix;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -30,8 +30,8 @@ public class JWTSecurityFilter implements Filter {
 	private static Set<String> loggedInUsers = new HashSet<>();
 	
 	static {
-		loggedInUsers.add("mauricio");
-		loggedInUsers.add("fundatec");
+		loggedInUsers.add("admin");
+		loggedInUsers.add("usuario");
 	}
 
 	@Override
@@ -40,9 +40,25 @@ public class JWTSecurityFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 
-		if (request.getRequestURI().equals("/")) {
-			chain.doFilter(req, res);
-		} else {
+		if (request.getMethod().equals("POST") || request.getMethod().equals("PUT") || request.getMethod().equals("DELETE")) {
+			String token = request.getHeader(TOKEN_HEADER);
+
+			if (token == null) {
+				LOGGER.warn(NO_SECURITY_TOKEN);
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, NO_SECURITY_TOKEN);
+			} else {
+				try {
+					String usuario = TokenParser.parse(token, "usuario");
+					validateUserAdm(usuario);
+				} catch (Exception e) {
+					LOGGER.warn(e.getMessage());
+					response.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
+					return;
+				}
+				chain.doFilter(req, res);
+			}
+		
+		}else {
 			String token = request.getHeader(TOKEN_HEADER);
 
 			if (token == null) {
@@ -59,7 +75,16 @@ public class JWTSecurityFilter implements Filter {
 				}
 				chain.doFilter(req, res);
 			}
+			
 		}
+			
+	}
+
+	private void validateUserAdm(String usuario) {
+		if (!loggedInUsers.contains(usuario)&& !usuario.equals("admin")) {
+			throw new RuntimeException("Usuario invalido");
+		}
+		
 	}
 
 	private void validateUser(String usuario) {

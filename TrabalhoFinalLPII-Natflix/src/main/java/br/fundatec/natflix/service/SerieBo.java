@@ -1,4 +1,4 @@
-package br.fundatec.natflix.web;
+package br.fundatec.natflix.service;
 
 import java.util.Date;
 
