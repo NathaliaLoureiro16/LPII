@@ -1,6 +1,6 @@
 package br.fundatec.natflix.dao;
 
-import java.util.Date;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import br.fundatec.natflix.service.EpisodioBo;
 
 
 @Entity
@@ -24,7 +26,7 @@ public class SerieEntity {
 	private String titulo;
 	
 	@Column(name="anoLancamento")
-	private Date anoLancamento;
+	private long anoLancamento;
 	
 	@Column(name="descricao")
 	private String descricao;
@@ -41,8 +43,8 @@ public class SerieEntity {
 	@Column(name="temporada")
 	private int temporada;
 	
-	//@OneToMany
-	//private List <EpisodioEntity> episodios;
+	@OneToMany
+	private List <EpisodioEntity> episodios;
 	
 	public long getId() {
 		return id;
@@ -56,10 +58,10 @@ public class SerieEntity {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	public Date getAnoLancamento() {
+	public long getAnoLancamento() {
 		return anoLancamento;
 	}
-	public void setAnoLancamento(Date anoLancamento) {
+	public void setAnoLancamento(long anoLancamento) {
 		this.anoLancamento = anoLancamento;
 	}
 	public String getDescricao() {
@@ -92,12 +94,13 @@ public class SerieEntity {
 	public void setTemporada(int temporada) {
 		this.temporada = temporada;
 	}
-	/*public List<EpisodioEntity> getEpisodios() {
+	public List<EpisodioEntity> getEpisodios() {
 		return episodios;
 	}
 	public void setEpisodios(List<EpisodioEntity> episodios) {
 		this.episodios = episodios;
+	
 	}
-	*/
+	
 	
 }

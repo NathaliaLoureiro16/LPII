@@ -1,18 +1,18 @@
 package br.fundatec.natflix.web;
 
-import java.util.Date;
+import java.util.List;
 
 public class SerieDTO {
 
 	private long id;
 	private String titulo;
-	private Date anoLancamento;
+	private long anoLancamento;
 	private String descricao;
 	private String atores;
 	private String criacao;
 	private String genero;
 	private int temporada;
-	//private List <EpisodioEntity> episodios;
+	private List <EpisodioDTO> episodios;
 	
 	public long getId() {
 		return id;
@@ -26,10 +26,10 @@ public class SerieDTO {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	public Date getAnoLancamento() {
+	public long getAnoLancamento() {
 		return anoLancamento;
 	}
-	public void setAnoLancamento(Date anoLancamento) {
+	public void setAnoLancamento(long anoLancamento) {
 		this.anoLancamento = anoLancamento;
 	}
 	public String getDescricao() {
@@ -62,11 +62,11 @@ public class SerieDTO {
 	public void setTemporada(int temporada) {
 		this.temporada = temporada;
 	}
-	/*public List<EpisodioEntity> getEpisodios() {
+	public List<EpisodioDTO> getEpisodios() {
 		return episodios;
 	}
-	public void setEpisodios(List<EpisodioEntity> episodios) {
+	public void setEpisodios(List<EpisodioDTO> episodios) {
 		this.episodios = episodios;
 	}
-	*/
+	
 }

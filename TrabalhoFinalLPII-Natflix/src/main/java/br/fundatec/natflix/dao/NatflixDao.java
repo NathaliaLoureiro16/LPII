@@ -23,21 +23,29 @@ public class NatflixDao {
 	}
 
 	public SerieEntity getSerieByID(long id) {
-		SerieEntity serie = new SerieEntity();
-		serie = em.find(SerieEntity.class, id);
-		return serie;
+		SerieEntity serie = em.find(SerieEntity.class, id);
+		if (serie != null) {
+			return serie;
+		}
+		throw new RuntimeException();
 	}
-	public List<SerieEntity> getSeries(){
+
+	public List<SerieEntity> getSeries() {
 		return em.createQuery("from SerieEntity").getResultList();
 	}
-	
+
 	@Transactional
 	public void deleteSerie(long id) {
 		SerieEntity se = em.find(SerieEntity.class, id);
-		if(se != null) {
+		if (se != null) {
 			em.remove(se);
 		}
-		
 
 	}
+	@Transactional
+	public EpisodioEntity addEp(EpisodioEntity epEntity) {
+		return em.merge(epEntity);
+		
+	}
+
 }

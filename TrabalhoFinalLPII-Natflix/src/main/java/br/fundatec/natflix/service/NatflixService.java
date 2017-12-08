@@ -1,5 +1,6 @@
 package br.fundatec.natflix.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class NatflixService {
 
 	}
 
-	public void deletaSerie(Long id) {
+	public void deletaSerie(long id) {
 		nDao.deleteSerie(id);
 
 	}
@@ -41,6 +42,14 @@ public class NatflixService {
 		SerieBo serieBo = NatflixConvert.convertEntitytoBo(nDao.getSerieByID(id));
 		return serieBo;
 
+	}
+
+	public EpisodioBo addEp(long id, EpisodioBo epBo) {
+		EpisodioBo bo = NatflixConvert.convertEntitytoBo(nDao.addEp(NatflixConvert.convertBotoEntity(epBo)));
+		SerieBo serieBo = getSerieByID(id);
+		serieBo.getEpisodios().add(bo);
+		addSerie(serieBo);
+		return bo;
 	}
 
 }
