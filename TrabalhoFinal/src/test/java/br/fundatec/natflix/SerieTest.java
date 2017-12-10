@@ -41,8 +41,7 @@ public class SerieTest {
 				+ "\"atores\":\"nina,ian,paul,candice\"," + "\"criacao\":\"Kevin Williamson\","
 				+ "\"genero\":\"terror e fantasia\"," + "\"temporada\": 8}";
 		mockMvc.perform(post(location).header("Content-Type", "application/json")
-				.header("token",
-						"eyJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVkIjoiMjAxNy0xMi0wNyAxNjowOTo0OS43NzIiLCJ1c3VhcmlvIjoiYWRtaW4ifQ.ACwZJYXALqcLkED7ep1hcinKx2I8BaovL1ekLzat7U0")
+				.header("token","eyJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVkIjoiMjAxNy0xMi0wNyAxNjowOTo0OS43NzIiLCJ1c3VhcmlvIjoiYWRtaW4ifQ.ACwZJYXALqcLkED7ep1hcinKx2I8BaovL1ekLzat7U0")
 				.content(json)).andExpect(status().is2xxSuccessful()).andExpect(jsonPath("$.id").value(1))
 				.andExpect(jsonPath("$.titulo").value("tvd")).andExpect(jsonPath("$.anoLancamento").value(2009))
 				.andExpect(jsonPath("$.descricao").value("serie de vampiros"))
@@ -55,8 +54,7 @@ public class SerieTest {
 	private void getSerie() throws Exception {
 		String location = "/natflix/series/";
 
-		mockMvc.perform(get(location).header("Content-Type", "application/json").header("token",
-				"eyJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVkIjoiMjAxNy0xMi0wNyAxNjowOTo0OS43NzIiLCJ1c3VhcmlvIjoiYWRtaW4ifQ.ACwZJYXALqcLkED7ep1hcinKx2I8BaovL1ekLzat7U0"))
+		mockMvc.perform(get(location).header("Content-Type", "application/json").header("token","eyJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVkIjoiMjAxNy0xMi0wNyAxNjowOTo0OS43NzIiLCJ1c3VhcmlvIjoiYWRtaW4ifQ.ACwZJYXALqcLkED7ep1hcinKx2I8BaovL1ekLzat7U0"))
 				.andExpect(status().is2xxSuccessful()).andExpect(jsonPath("$[0]").exists())
 				.andExpect(jsonPath("$[0].id").value(1)).andExpect(jsonPath("$[0].titulo").value("tvd"))
 				.andExpect(jsonPath("$[0].anoLancamento").value(2009))
@@ -74,8 +72,7 @@ public class SerieTest {
 				+ "\"descricao\":\"serie de vampiros\"," + "\"atores\":\"nina,ian,paul,candice\","
 				+ "\"criacao\":\"Kevin Williamson\"," + "\"genero\":\"terror e fantasia\"," + "\"temporada\": 8}";
 
-		mockMvc.perform(put(location).header("Content-Type", "application/json").content(json).header("token",
-				"eyJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVkIjoiMjAxNy0xMi0wNyAxNjowOTo0OS43NzIiLCJ1c3VhcmlvIjoiYWRtaW4ifQ.ACwZJYXALqcLkED7ep1hcinKx2I8BaovL1ekLzat7U0"))
+		mockMvc.perform(put(location).header("Content-Type", "application/json").content(json).header("token","eyJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVkIjoiMjAxNy0xMi0wNyAxNjowOTo0OS43NzIiLCJ1c3VhcmlvIjoiYWRtaW4ifQ.ACwZJYXALqcLkED7ep1hcinKx2I8BaovL1ekLzat7U0"))
 				.andExpect(status().is2xxSuccessful()).andExpect(jsonPath("$.id").value(1))
 				.andExpect(jsonPath("$.titulo").value("The Vampire Diaries")).andExpect(jsonPath("$.anoLancamento").value(2009))
 				.andExpect(jsonPath("$.descricao").value("serie de vampiros"))
@@ -89,8 +86,7 @@ public class SerieTest {
 	private void deleteSerie() throws Exception {
 		String location = "natflix/series/{id}";
 
- 		mockMvc.perform(delete(location,1).header("Content-Type", "application/json").header("token",
-				"eyJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVkIjoiMjAxNy0xMi0wNyAxNjowOTo0OS43NzIiLCJ1c3VhcmlvIjoiYWRtaW4ifQ.ACwZJYXALqcLkED7ep1hcinKx2I8BaovL1ekLzat7U0"))
+ 		mockMvc.perform(delete(location,1).header("Content-Type", "application/json").header("token","eyJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVkIjoiMjAxNy0xMi0wNyAxNjowOTo0OS43NzIiLCJ1c3VhcmlvIjoiYWRtaW4ifQ.ACwZJYXALqcLkED7ep1hcinKx2I8BaovL1ekLzat7U0"))
 				   .andExpect(status().isNoContent());
 	}
 }

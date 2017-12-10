@@ -1,12 +1,13 @@
 package br.fundatec.natflix.service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.fundatec.natflix.convert.NatflixConvert;
+import br.fundatec.natflix.convert.EpConvert;
+import br.fundatec.natflix.convert.SerieConvert;
 import br.fundatec.natflix.dao.NatflixDao;
 import br.fundatec.natflix.dao.SerieEntity;
 import br.fundatec.natflix.web.SerieDTO;
@@ -21,14 +22,14 @@ public class NatflixService {
 	}
 
 	public List<SerieBo> pegaSeries() {
-		List<SerieBo> seriesBo = NatflixConvert.convertListEntitytoBo(nDao.getSeries());
+		List<SerieBo> seriesBo = SerieConvert.convertListEntitytoBo(nDao.getSeries());
 		return seriesBo;
 	}
 
 	public SerieBo addSerie(SerieBo bo) {
-		SerieEntity se = NatflixConvert.convertBotoEntity(bo);
+		SerieEntity se = SerieConvert.convertBotoEntity(bo);
 		se = nDao.addSerie(se);
-		bo = NatflixConvert.convertEntitytoBo(se);
+		bo = SerieConvert.convertEntitytoBo(se);
 		return bo;
 
 	}
@@ -39,17 +40,17 @@ public class NatflixService {
 	}
 
 	public SerieBo getSerieByID(Long id) {
-		SerieBo serieBo = NatflixConvert.convertEntitytoBo(nDao.getSerieByID(id));
+		SerieBo serieBo = SerieConvert.convertEntitytoBo(nDao.getSerieByID(id));
 		return serieBo;
 
 	}
-
+//========================================================================================================\\
 	public EpisodioBo addEp(long id, EpisodioBo epBo) {
-		EpisodioBo bo = NatflixConvert.convertEntitytoBo(nDao.addEp(NatflixConvert.convertBotoEntity(epBo)));
 		SerieBo serieBo = getSerieByID(id);
-		serieBo.getEpisodios().add(bo);
+		epBo = EpConvert.convertEntitytoBo(nDao.addEp(EpConvert.convertBotoEntity(epBo)));
+		serieBo.getEpisodios().add(epBo);
 		addSerie(serieBo);
-		return bo;
+		return epBo;
 	}
 
 }

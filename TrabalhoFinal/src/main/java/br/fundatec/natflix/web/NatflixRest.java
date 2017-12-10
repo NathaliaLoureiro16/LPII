@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.fundatec.natflix.convert.NatflixConvert;
-import br.fundatec.natflix.dao.SerieEntity;
+import br.fundatec.natflix.convert.EpConvert;
+import br.fundatec.natflix.convert.SerieConvert;
 import br.fundatec.natflix.service.EpisodioBo;
 import br.fundatec.natflix.service.NatflixService;
 import br.fundatec.natflix.service.SerieBo;
@@ -33,14 +33,14 @@ public class NatflixRest {
 	@GetMapping("/series")
 	public ResponseEntity<List<SerieDTO>> getSerie() {
 		List<SerieBo> seriesBo = natflixService.pegaSeries();
-		List<SerieDTO> seriesDTO = NatflixConvert.convertListBotoDTO(seriesBo);
+		List<SerieDTO> seriesDTO = SerieConvert.convertListBotoDTO(seriesBo);
 		return ResponseEntity.ok(seriesDTO);
 	}
 
 	@GetMapping("/series/{id}")
 	public ResponseEntity<SerieDTO> getSerieId(@PathVariable("id") long id) {
 		try {
-			SerieDTO serieDTO = NatflixConvert.convertBotoDTO(natflixService.getSerieByID(id));
+			SerieDTO serieDTO = SerieConvert.convertBotoDTO(natflixService.getSerieByID(id));
 			return ResponseEntity.ok(serieDTO);
 		} catch (Exception e) {
 			return ResponseEntity.notFound().build();
@@ -58,23 +58,23 @@ public class NatflixRest {
 
 	@PostMapping("/series")
 	public ResponseEntity<SerieDTO> addSerie(@RequestBody SerieDTO serieDTO) {
-		SerieBo serieBo = NatflixConvert.convertDTOtoBo(serieDTO);
-		serieDTO = NatflixConvert.convertBotoDTO(natflixService.addSerie(serieBo));
+		SerieBo serieBo = SerieConvert.convertDTOtoBo(serieDTO);
+		serieDTO = SerieConvert.convertBotoDTO(natflixService.addSerie(serieBo));
 		return ResponseEntity.ok(serieDTO);
 
 	}
 
 	@PutMapping("/series")
 	public ResponseEntity<SerieDTO> attSerie(@RequestBody SerieDTO serieDTO) {
-		SerieBo serieBo = NatflixConvert.convertDTOtoBo(serieDTO);
-		serieDTO = NatflixConvert.convertBotoDTO(natflixService.addSerie(serieBo));
+		SerieBo serieBo = SerieConvert.convertDTOtoBo(serieDTO);
+		serieDTO = SerieConvert.convertBotoDTO(natflixService.addSerie(serieBo));
 		return ResponseEntity.ok(serieDTO);
 	}
 	@PostMapping("/series/{id}/episodio")
 	public ResponseEntity<EpisodioDTO>addEp(@RequestBody EpisodioDTO epDTO,@PathVariable("id") long id){
-		EpisodioBo epBo = NatflixConvert.convertDTOtoBo(epDTO);
+		EpisodioBo epBo = EpConvert.convertDTOtoBo(epDTO);
 		epBo = natflixService.addEp(id,epBo);
-		return ResponseEntity.ok(NatflixConvert.convertBotoDTO(epBo));
+		return ResponseEntity.ok(EpConvert.convertBotoDTO(epBo));
 		
 	}
 }
