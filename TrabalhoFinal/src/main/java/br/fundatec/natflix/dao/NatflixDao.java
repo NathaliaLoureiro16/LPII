@@ -1,5 +1,6 @@
 package br.fundatec.natflix.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,6 +8,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import br.fundatec.natflix.convert.EpConvert;
+import br.fundatec.natflix.service.EpisodioBo;
+import br.fundatec.natflix.service.SerieBo;
 
 @Component
 public class NatflixDao {
@@ -18,7 +23,7 @@ public class NatflixDao {
 	}
 
 	@Transactional
-	public SerieEntity addSerie(SerieEntity se) {
+	public SerieEntity addEattSerie(SerieEntity se) {
 		return em.merge(se);
 	}
 
@@ -42,10 +47,10 @@ public class NatflixDao {
 		}
 
 	}
+
 	@Transactional
 	public EpisodioEntity addEp(EpisodioEntity epEntity) {
 		return em.merge(epEntity);
-		
-	}
 
+	}
 }

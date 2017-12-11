@@ -58,7 +58,7 @@ public class EpConvert {
 		}
 		return tity;
 	}
-	private static List<EpisodioDTO> convertListEpisodioBotoDTO(List<EpisodioBo> epBo) {
+	public static List<EpisodioDTO> convertListEpisodioBotoDTO(List<EpisodioBo> epBo) {
 		List<EpisodioDTO> dtos = new ArrayList<>();
 		for (EpisodioBo episodioBo : epBo) {
 			EpisodioDTO dto = new EpisodioDTO();
@@ -70,6 +70,31 @@ public class EpConvert {
 		}
 		return dtos;
 	}
+	public static List<EpisodioBo> convertListEpisodioEntitytoBo(List<EpisodioEntity> epEntity) {
+		List<EpisodioBo> bos = new ArrayList<>();
+		for(EpisodioEntity episodioEntity : epEntity){
+			EpisodioBo bo = new EpisodioBo();
+			bo.setId(episodioEntity.getId());
+			bo.setTitulo(episodioEntity.getTitulo());
+			bo.setDescricao(episodioEntity.getDescricao());
+			bo.setDuracao(episodioEntity.getDuracao());
+			bos.add(bo);
+		}
+		return bos;
+	}
+	public static List<EpisodioBo> convertListEpisodioDTOtoBo(List<EpisodioDTO> episodioDTO) {
+		List<EpisodioBo> bos = new ArrayList<>();
+		for(EpisodioDTO epDTO : episodioDTO){
+		EpisodioBo bo = new EpisodioBo();
+		bo.setId(epDTO.getId());
+		bo.setTitulo(epDTO.getTitulo());
+		bo.setDescricao(epDTO.getDescricao());
+		bo.setDuracao(epDTO.getDuracao());
+		bos.add(bo);
+		}
+		return bos;
+	}
+	
 
 }
 

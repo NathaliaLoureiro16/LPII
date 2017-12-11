@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.fundatec.natflix.dao.SerieEntity;
+import br.fundatec.natflix.service.EpisodioBo;
 import br.fundatec.natflix.service.SerieBo;
+import br.fundatec.natflix.web.EpisodioDTO;
 import br.fundatec.natflix.web.SerieDTO;
 
 public class SerieConvert {
@@ -20,6 +22,7 @@ public class SerieConvert {
 		entity.setCriacao(bo.getCriacao());
 		entity.setGenero(bo.getGenero());
 		entity.setTemporada(bo.getTemporada());
+		entity.setEpisodios(EpConvert.convertListEpisodioBotoEntity(bo.getEpisodios()));
 		return entity;
 	}
 
@@ -33,6 +36,7 @@ public class SerieConvert {
 		bo.setCriacao(entity.getCriacao());
 		bo.setGenero(entity.getGenero());
 		bo.setTemporada(entity.getTemporada());
+		bo.setEpisodios(EpConvert.convertListEpisodioEntitytoBo(entity.getEpisodios()));
 
 		return bo;
 	}
@@ -47,6 +51,7 @@ public class SerieConvert {
 		dto.setCriacao(bo.getCriacao());
 		dto.setGenero(bo.getGenero());
 		dto.setTemporada(bo.getTemporada());
+		dto.setEpisodios(EpConvert.convertListEpisodioBotoDTO(bo.getEpisodios()));
 		return dto;
 	}
 	public static SerieBo convertDTOtoBo(SerieDTO dto) {
@@ -59,6 +64,7 @@ public class SerieConvert {
 		Bo.setCriacao(dto.getCriacao());
 		Bo.setGenero(dto.getGenero());
 		Bo.setTemporada(dto.getTemporada());
+		//Bo.setEpisodios(EpConvert.convertListEpisodioDTOtoBo(dto.getEpisodios()));
 		return Bo;
 	}
 	//===============================================================================================\\
@@ -75,26 +81,27 @@ public class SerieConvert {
 			bo.setCriacao(serieEntity.getCriacao());
 			bo.setGenero(serieEntity.getGenero());
 			bo.setTemporada(serieEntity.getTemporada());
+			bo.setEpisodios(EpConvert.convertListEpisodioEntitytoBo(serieEntity.getEpisodios()));
 			bos.add(bo);
 		}
 		return bos;
 
 	}
-	public static List<SerieDTO> convertListBotoDTO(List<SerieBo> Bo) {
+
+	public static List<SerieDTO> convertListBotoDTO(List<SerieBo> seBo) {
 		List<SerieDTO> dtos = new ArrayList<>();
-		for (SerieBo seriesBo : Bo) {
+		for (SerieBo bo : seBo) {
 			SerieDTO dto = new SerieDTO();
-			dto.setId(seriesBo.getId());
-			dto.setTitulo(seriesBo.getTitulo());
-			dto.setAnoLancamento(seriesBo.getAnoLancamento());
-			dto.setDescricao(seriesBo.getDescricao());
-			dto.setAtores(seriesBo.getAtores());
-			dto.setCriacao(seriesBo.getCriacao());
-			dto.setGenero(seriesBo.getGenero());
-			dto.setTemporada(seriesBo.getTemporada());
-
+			dto.setId(bo.getId());
+			dto.setTitulo(bo.getTitulo());
+			dto.setAnoLancamento(bo.getAnoLancamento());
+			dto.setDescricao(bo.getDescricao());
+			dto.setAtores(bo.getAtores());
+			dto.setCriacao(bo.getCriacao());
+			dto.setGenero(bo.getGenero());
+			dto.setTemporada(bo.getTemporada());
+			dto.setEpisodios(EpConvert.convertListEpisodioBotoDTO(bo.getEpisodios()));
 			dtos.add(dto);
-
 		}
 		return dtos;
 	}
