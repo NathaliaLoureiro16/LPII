@@ -94,7 +94,5 @@ public class EpConvert {
 		}
 		return bos;
 	}
-	
-
 }
 

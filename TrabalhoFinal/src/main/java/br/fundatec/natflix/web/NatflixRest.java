@@ -70,12 +70,26 @@ public class NatflixRest {
 		serieDTO = SerieConvert.convertBotoDTO(natflixService.addSerie(serieBo));
 		return ResponseEntity.ok(serieDTO);
 	}
+	//==========================================================================================================//
 	@PostMapping("/series/{id}/episodio")
 	public ResponseEntity<EpisodioDTO>addEp(@RequestBody EpisodioDTO epDTO,@PathVariable("id") long id){
 		EpisodioBo epBo = EpConvert.convertDTOtoBo(epDTO);
 		epBo = natflixService.addEp(id,epBo);
 		return ResponseEntity.ok(EpConvert.convertBotoDTO(epBo));
 		
+	}
+	@GetMapping("/series/{id}/episodio")
+	public ResponseEntity<List<EpisodioDTO>> getEpisodio(@PathVariable("id")long id) {
+		List<EpisodioBo> episodioBo = natflixService.pegaEpisodio();
+		List<EpisodioDTO> episodioDTO = EpConvert.convertListEpisodioBotoDTO(episodioBo);
+		return ResponseEntity.ok(episodioDTO);
+	}
+	@PutMapping("/series/{id}/episodio/{idEp}")
+	public ResponseEntity<EpisodioDTO> attEpisodio(@RequestBody EpisodioDTO episodioDTO,@PathVariable("id")long id,@PathVariable ("idEp") long idEp) {
+		episodioDTO.setId(idEp);
+		EpisodioBo episodioBo = EpConvert.convertDTOtoBo(episodioDTO);
+		episodioDTO = EpConvert.convertBotoDTO(natflixService.attEpisodio(idEp, episodioBo));
+		return ResponseEntity.ok(episodioDTO);
 	}
 
 }

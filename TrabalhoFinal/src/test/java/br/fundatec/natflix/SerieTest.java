@@ -43,11 +43,13 @@ public class SerieTest {
 		mockMvc.perform(post(location).header("Content-Type", "application/json")
 				.header("token","eyJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVkIjoiMjAxNy0xMi0wNyAxNjowOTo0OS43NzIiLCJ1c3VhcmlvIjoiYWRtaW4ifQ.ACwZJYXALqcLkED7ep1hcinKx2I8BaovL1ekLzat7U0")
 				.content(json)).andExpect(status().is2xxSuccessful()).andExpect(jsonPath("$.id").value(1))
-				.andExpect(jsonPath("$.titulo").value("tvd")).andExpect(jsonPath("$.anoLancamento").value(2009))
+				.andExpect(jsonPath("$.titulo").value("tvd"))
+				.andExpect(jsonPath("$.anoLancamento").value(2009))
 				.andExpect(jsonPath("$.descricao").value("serie de vampiros"))
 				.andExpect(jsonPath("$.atores").value("nina,ian,paul,candice"))
 				.andExpect(jsonPath("$.criacao").value("Kevin Williamson"))
-				.andExpect(jsonPath("$.genero").value("terror e fantasia")).andExpect(jsonPath("$.temporada").value(8));
+				.andExpect(jsonPath("$.genero").value("terror e fantasia"))
+				.andExpect(jsonPath("$.temporada").value(8));
 
 	}
 
@@ -84,7 +86,7 @@ public class SerieTest {
 	}
 
 	private void deleteSerie() throws Exception {
-		String location = "natflix/series/{id}";
+		String location = "/natflix/series/{id}";
 
  		mockMvc.perform(delete(location,1).header("Content-Type", "application/json").header("token","eyJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVkIjoiMjAxNy0xMi0wNyAxNjowOTo0OS43NzIiLCJ1c3VhcmlvIjoiYWRtaW4ifQ.ACwZJYXALqcLkED7ep1hcinKx2I8BaovL1ekLzat7U0"))
 				   .andExpect(status().isNoContent());

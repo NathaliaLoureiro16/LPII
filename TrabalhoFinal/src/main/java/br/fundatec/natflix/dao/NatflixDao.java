@@ -53,4 +53,21 @@ public class NatflixDao {
 		return em.merge(epEntity);
 
 	}
+
+	public List<EpisodioEntity> getEpisodio() {
+		return em.createQuery("from EpisodioEntity").getResultList();
+	}
+
+	public void deleteEpisodio(long id) {
+		EpisodioEntity ep = em.find(EpisodioEntity.class, id);
+		if (ep != null) {
+			em.remove(ep);
+
+		}
+	}
+	@Transactional
+	public EpisodioEntity  attEpisodio(EpisodioEntity att) {
+			return em.merge(att);
+	}
+	
 }

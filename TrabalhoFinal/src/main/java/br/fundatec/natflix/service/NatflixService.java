@@ -51,7 +51,6 @@ public class NatflixService {
 		SerieBo serieBo = getSerieByID(id);
 		epBo = EpConvert.convertEntitytoBo(nDao.addEp(EpConvert.convertBotoEntity(epBo)));
 		
-		
 		try {
 			serieBo.getEpisodios().add(epBo);
 			nDao.addEattSerie(SerieConvert.convertBotoEntity(serieBo));
@@ -61,6 +60,19 @@ public class NatflixService {
 			throw new RuntimeException();
 		}
 		
+	}
+
+	public List<EpisodioBo> pegaEpisodio() {
+		List<EpisodioBo> episodioBo = EpConvert.convertListEpisodioEntitytoBo(nDao.getEpisodio());
+		return episodioBo;
+	}
+
+	public void deletaEpisodio(long id) {
+		nDao.deleteEpisodio(id);
+		
+	}
+	public EpisodioBo attEpisodio(long id,EpisodioBo epBo) {
+		return EpConvert.convertEntitytoBo(nDao.attEpisodio(EpConvert.convertBotoEntity(epBo)));
 	}
 
 }
